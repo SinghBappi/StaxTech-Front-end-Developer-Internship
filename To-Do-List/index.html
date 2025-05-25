@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-DO List</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <h2>To-DO List</h2>
+    <div id="todo-container">
+        <!-- <center> -->
+
+        <input type="text" name="task-input" id="task-input" placeholder="Enter a Task">
+        <!-- <br> -->
+
+        <select name="category" id="category">
+            <option value="Work">Work</option>
+            <option value="Office">Office</option>
+            <option value="Personal">Personal</option>
+            <option value="School/College">School/College</option>
+        </select>
+
+        <select name="Priority" id="Priority">
+            <option value="low">low</option>
+            <option value="Meduim">Meduim</option>
+            <option value="High">High</option>
+            <option value="Emergency">Emergency</option>
+        </select>
+
+        <button onclick="addfun()">Add</button>
+        <ul id="task-list"></ul>
+        <!-- </center> -->
+        <script>
+            function addfun() {
+                const taskInput = document.getElementById("task-input");
+                const category = document.getElementById("category").value;
+                // value is case sensitive;
+                const priority = document.getElementById("Priority").value;
+                const taskText = taskInput.value.trim();
+
+                if (taskText === "") return;
+                const li = document.createElement("li");
+                li.classList.add(priority);
+                li.innerHTML = `<strong>${taskText}</strong><br>
+                Category:${category} || Priority:${priority.toUpperCase()}`;
+                li.onclick = function () {
+                    const confirmDelete = confirm("You really want to DELETE This Task !?");
+                    if (confirmDelete) {
+                        li.remove();
+                    }
+                };
+                document.getElementById("task-list").appendChild(li);
+                taskInput.value= "";
+
+            }
+        </script>
+
+
+
+    </div>
+</body>
+
+</html>
